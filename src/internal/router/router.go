@@ -14,7 +14,7 @@ type Router struct {
 	srv            *fasthttp.Server
 	logger         *logrus.Logger
 	billingService service.Service
-	port           string
+	host           string
 }
 
 func NewRouter(logger *logrus.Logger, cfg *config.Config,
@@ -27,7 +27,7 @@ func NewRouter(logger *logrus.Logger, cfg *config.Config,
 		router:         router,
 		logger:         logger,
 		billingService: billingService,
-		port:           cfg.Service.Port,
+		host:           cfg.Service.Host,
 		srv:            srv,
 	}
 	srv.Handler = r.loggerDecorator(router.Handler)
@@ -40,7 +40,7 @@ func NewRouter(logger *logrus.Logger, cfg *config.Config,
 }
 
 func (r *Router) Start() error {
-	return r.srv.ListenAndServe(r.port)
+	return r.srv.ListenAndServe(r.host)
 }
 
 func (r *Router) Shutdown() error {
