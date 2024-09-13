@@ -1,27 +1,27 @@
 FROM golang:1.22-alpine AS builder
 
-WORKDIR /src
+WORKDIR /build
 
-ADD go.mod .
-ADD go.sum .
+ADD /src/go.mod .
+ADD /src/go.sum .
 RUN go mod download
 RUN pwd
 
 
-COPY cmd cmd
-COPY internal internal
+COPY /src/cmd cmd
+COPY /src/internal internal
 
 RUN GOOS=linux go build -o app ./cmd
 
 FROM golang:1.22-alpine
 WORKDIR /root/
 
-COPY configs configs
+COPY /src/configs configs
 
-ENV HOUSE_DB_USER=${HOUSE_DB_USER}
-ENV HOUSE_DB_PASSWORD=${HOUSE_DB_PASSWORD}
-ENV USER_DB_USER=${HOUSE_DB_USER}
-ENV USER_DB_PASSWORD=${HOUSE_DB_PASSWORD}
+ENV POSTGRES_USERNAME=${POSTGRES_USERNAME}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_HOST=${POSTGRES_HOST}
+ENV POSTGRES_PORT=${POSTGRES_PORT}
 COPY --from=builder /build/app .
 
 
