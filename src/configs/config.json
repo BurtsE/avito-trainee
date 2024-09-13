@@ -1,0 +1,10 @@
+{
+    "billing_db": {
+        "max_conns": 1,
+        "sslmode": "disable"
+    },
+    "service": {
+        "port": ":8000",
+        "host": "127.0.0.1"
+    }
+}
