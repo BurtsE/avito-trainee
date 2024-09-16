@@ -43,7 +43,7 @@ func (s *serviceProvider) Storage() storages.Storage {
 	if s.bilingStorage == nil {
 		storage, err := billingStorage.NewRepository(s.Config())
 		if err != nil {
-			log.Printf("could not init storage: %s", err.Error())
+			log.Fatalf("could not init storage: %s", err.Error())
 		}
 		s.bilingStorage = storage
 	}

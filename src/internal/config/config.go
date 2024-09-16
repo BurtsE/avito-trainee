@@ -6,7 +6,7 @@ type Config struct {
 }
 
 type Service struct {
-	Host string `env:"SERVER_ADDRESS,notEmpty"`
+	Port string `json:"server_port"`
 }
 
 type BillingDB struct {

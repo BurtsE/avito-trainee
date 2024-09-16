@@ -20,6 +20,6 @@ func (a *App) Run() error {
 }
 
 func (a *App) runServer() error {
-	log.Printf("server is running on %s", a.serviceProvider.Config().Service.Host)
+	log.Printf("server is running on %s", a.serviceProvider.Config().Service.Port)
 	return a.serviceProvider.router.Start()
 }

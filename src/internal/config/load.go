@@ -2,6 +2,7 @@ package config
 
 import (
 	"encoding/json"
+	"log"
 	"os"
 
 	"github.com/caarlos0/env/v11"
@@ -23,5 +24,6 @@ func InitConfig() (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Println(cfg)
 	return cfg, nil
 }
